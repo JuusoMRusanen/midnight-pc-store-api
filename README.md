@@ -1,2 +1,2 @@
 # midnight-pc-store-api
-A fun e-commerce store API for learning purposes
+An e-commerce store API for learning purposes
