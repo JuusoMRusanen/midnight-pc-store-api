@@ -1,0 +1,39 @@
+{
+  "name": "midnight-pc-store-api",
+  "version": "1.0.0",
+  "description": "An e-commerce store API for learning purposes",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuusoMRusanen/midnight-pc-store-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "prisma",
+    "graphql"
+  ],
+  "author": "JuusoMRusanen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuusoMRusanen/midnight-pc-store-api/issues"
+  },
+  "homepage": "https://github.com/JuusoMRusanen/midnight-pc-store-api#readme",
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@prisma/client": "^5.14.0",
+    "@types/node": "^20.13.0",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.14.0",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  },
+  "type": "module"
+}
