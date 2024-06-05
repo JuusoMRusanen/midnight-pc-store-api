@@ -2,3 +2,61 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id           String         @id @default(uuid())
+  name         String
+  description  String?
+  price        Float
+  stock        Int
+  // categoryId   String
+  // category     Category       @relation(fields: [categoryId], references: [id])
+  images       Image[]
+  OrderProduct OrderProduct[]
+}
+
+// model Category {
+//   id          String    @id @default(uuid())
+//   name        String
+//   description String?
+//   products    Product[]
+// }
+
+model Order {
+  id         String         @id @default(uuid())
+  userId     String
+  user       User           @relation(fields: [userId], references: [id])
+  total      Float
+  status     String
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  orderItems OrderProduct[]
+}
+
+model OrderProduct {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+model User {
+  id     String  @id @default(uuid())
+  name   String
+  email  String  @unique
+  orders Order[]
+}
+
+model Image {
+  id        String  @id @default(uuid())
+  url       String
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
