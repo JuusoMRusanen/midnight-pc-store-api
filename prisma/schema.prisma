@@ -13,18 +13,18 @@ model Product {
   description  String?
   price        Float
   stock        Int
-  // categoryId   String
-  // category     Category       @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+  category     Category?       @relation(fields: [categoryId], references: [id])
   images       Image[]
   OrderProduct OrderProduct[]
 }
 
-// model Category {
-//   id          String    @id @default(uuid())
-//   name        String
-//   description String?
-//   products    Product[]
-// }
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  products    Product[]
+}
 
 model Order {
   id         String         @id @default(uuid())
