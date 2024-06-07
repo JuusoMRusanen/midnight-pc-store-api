@@ -7,7 +7,14 @@ interface Context {
 }
 
 export const Mutation = {
-  // Resolver for adding a product
+  /**
+   * Resolver for adding a product
+   *
+   * @param _parent parent
+   * @param args arguments
+   * @param context context
+   * @returns newUser
+   */
   addProduct: async (
     _parent: any,
     args: { input: Prisma.ProductCreateInput },
@@ -27,6 +34,33 @@ export const Mutation = {
       return newProduct;
     } catch (error) {
       throw new Error(`Failed to add product: ${error.message}`);
+    }
+  },
+
+  /**
+   * Resolver for adding a user
+   *
+   * @param _parent parent
+   * @param args arguments
+   * @param context context
+   * @returns newUser
+   */
+  addUser: async (
+    _parent: any,
+    args: { input: Prisma.UserCreateInput },
+    context: Context
+  ) => {
+    const { input } = args;
+    try {
+      const newUser = await context.prisma.user.create({
+        data: {
+          name: input.name,
+          email: input.email,
+        },
+      });
+      return newUser;
+    } catch (error) {
+      throw new Error(`Failed to add user: ${error.message}`);
     }
   },
 
