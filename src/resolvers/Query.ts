@@ -2,7 +2,7 @@
  * Find and return a product by id
  *
  * @param parent parent
- * @param args args
+ * @param args arguments
  * @param context context
  * @returns product
  */
@@ -14,7 +14,7 @@ function product(parent, args, context) {
  * Find and return all products
  *
  * @param parent parent
- * @param args args
+ * @param args arguments
  * @param context context
  * @returns product
  */
@@ -22,4 +22,16 @@ function products(parent, args, context) {
   return context.prisma.product.findMany();
 }
 
-export default { product, products };
+/**
+ * Find and return all users
+ *
+ * @param parent parent
+ * @param args arguments
+ * @param context context
+ * @returns users
+ */
+function users(parent, args, context) {
+  return context.prisma.user.findMany();
+}
+
+export default { product, products, users };
