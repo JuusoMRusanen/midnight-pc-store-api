@@ -11,8 +11,8 @@ type Query {
     pagination: PaginationInput
   ): [Product]
   product(id: ID!): Product
-  # categories: [Category]
-  # category(id: ID!): Category
+  categories: [Category]
+  category(id: ID!): Category
   orders(
     filter: OrderFilter
     sort: OrderSort
@@ -28,9 +28,9 @@ type Mutation {
   addProduct(input: ProductInput!): Product
   updateProduct(id: ID!, input: ProductInput!): Product
   deleteProduct(id: ID!): Boolean
-  # addCategory(input: CategoryInput!): Category
-  # updateCategory(id: ID!, input: CategoryInput!): Category
-  # deleteCategory(id: ID!): Boolean
+  addCategory(input: CategoryInput!): Category
+  updateCategory(id: ID!, input: CategoryInput!): Category
+  deleteCategory(id: ID!): Boolean
   addOrder(input: OrderInput!): Order
   updateOrder(id: ID!, input: OrderInput!): Order
   deleteOrder(id: ID!): Boolean
@@ -46,16 +46,16 @@ type Product {
   description: String
   price: Float!
   stock: Int!
-  # category: Category!
+  category: Category!
   images: [String]
 }
 
-# type Category {
-#   id: ID!
-#   name: String!
-#   description: String
-#   products: [Product]
-# }
+type Category {
+  id: ID!
+  name: String!
+  description: String
+  products: [Product]
+}
 
 type Order {
   id: ID!
@@ -94,14 +94,14 @@ input ProductInput {
   description: String
   price: Float!
   stock: Int!
-  # categoryId: ID!
+  categoryId: ID!
   images: [String]
 }
 
-# input CategoryInput {
-#   name: String!
-#   description: String
-# }
+input CategoryInput {
+  name: String!
+  description: String
+}
 
 input OrderInput {
   userId: ID!
@@ -122,7 +122,7 @@ input UserInput {
 # Filters
 input ProductFilter {
   name: String
-  # categoryId: ID
+  categoryId: ID
   priceRange: PriceRange
 }
 
