@@ -8,11 +8,11 @@ import { Context } from "src/types";
  * @param context context
  * @returns category
  */
-// function category(parent: any, _args: any, context: Context) {
-//   return context.prisma.product
-//     .findUnique({ where: { id: parent.id } })
-//     .category();
-// }
+function category(parent: any, _args: any, context: Context) {
+  return context.prisma.product
+    .findUnique({ where: { id: parent.id } })
+    .category();
+}
 
 /**
  * Find and return images of product
@@ -28,7 +28,7 @@ function images(parent: any, _args: any, context: Context) {
     .images();
 }
 
-module.exports = {
-  // category,
+export default {
+  category,
   images,
 };
