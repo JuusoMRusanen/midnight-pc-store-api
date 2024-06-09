@@ -34,4 +34,28 @@ function users(parent, args, context) {
   return context.prisma.user.findMany();
 }
 
-export default { product, products, users };
+/**
+ * Find and return all images
+ *
+ * @param parent parent
+ * @param args arguments
+ * @param context context
+ * @returns images
+ */
+function images(parent, args, context) {
+  return context.prisma.image.findMany();
+}
+
+/**
+ * Find and return all categories
+ *
+ * @param parent parent
+ * @param args arguments
+ * @param context context
+ * @returns categories
+ */
+function categories(parent, args, context) {
+  return context.prisma.category.findMany();
+}
+
+export default { product, products, users, images, categories };
