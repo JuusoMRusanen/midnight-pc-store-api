@@ -64,5 +64,32 @@ export const Mutation = {
     }
   },
 
+  /**
+   * Resolver for adding a image
+   *
+   * @param _parent parent
+   * @param args arguments
+   * @param context context
+   * @returns newImage
+   */
+  addImage: async (
+    _parent: any,
+    args: { input: Prisma.ImageCreateInput },
+    context: Context
+  ) => {
+    const { input } = args;
+    try {
+      const newImage = await context.prisma.image.create({
+        data: {
+          url: input.url,
+          productId: input.id,
+        },
+      });
+      return newImage;
+    } catch (error) {
+      throw new Error(`Failed to add image: ${error.message}`);
+    }
+  },
+
   // Other mutation resolvers go here
 };
