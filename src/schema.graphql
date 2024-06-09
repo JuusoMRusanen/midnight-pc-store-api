@@ -21,6 +21,7 @@ type Query {
   order(id: ID!): Order
   users(filter: UserFilter, sort: UserSort, pagination: PaginationInput): [User]
   user(id: ID!): User
+  images: [Image]
 }
 
 # Root Mutation Type
@@ -37,6 +38,7 @@ type Mutation {
   addUser(input: UserInput!): User
   updateUser(id: ID!, input: UserInput!): User
   deleteUser(id: ID!): Boolean
+  addImage(input: ImageInput!): Image
 }
 
 # Types
@@ -47,7 +49,13 @@ type Product {
   price: Float!
   stock: Int!
   category: Category!
-  images: [String]
+  images: [Image]
+}
+
+type Image {
+  id: ID!
+  url: String
+  product: Product
 }
 
 type Category {
@@ -95,7 +103,12 @@ input ProductInput {
   price: Float!
   stock: Int!
   categoryId: ID!
-  images: [String]
+  images: [ImageInput]
+}
+
+input ImageInput {
+  url: String!
+  productId: ID!
 }
 
 input CategoryInput {
