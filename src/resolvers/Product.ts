@@ -1,3 +1,4 @@
+import { Product } from "@prisma/client";
 import { Context } from "src/types";
 
 /**
@@ -8,7 +9,7 @@ import { Context } from "src/types";
  * @param context context
  * @returns category
  */
-function category(parent: any, _args: any, context: Context) {
+function category(parent: Product, _args: unknown, context: Context) {
   return context.prisma.product
     .findUnique({ where: { id: parent.id } })
     .category();
@@ -22,7 +23,7 @@ function category(parent: any, _args: any, context: Context) {
  * @param context context
  * @returns images
  */
-function images(parent: any, _args: any, context: Context) {
+function images(parent: Product, _args: unknown, context: Context) {
   return context.prisma.product
     .findUnique({ where: { id: parent.id } })
     .images();
