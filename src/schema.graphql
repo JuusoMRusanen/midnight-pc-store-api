@@ -48,7 +48,7 @@ type Product {
   description: String
   price: Float!
   stock: Int!
-  category: Category!
+  category: Category
   images: [Image]
 }
 
@@ -103,12 +103,11 @@ input ProductInput {
   price: Float!
   stock: Int!
   categoryId: ID!
-  images: [ImageInput]
 }
 
 input ImageInput {
-  url: String!
   productId: ID!
+  url: String!
 }
 
 input CategoryInput {
