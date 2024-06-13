@@ -30,13 +30,17 @@
     "graphql": "^16.8.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
     "@jest/globals": "^29.7.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.12",
+    "eslint": "^8.57.0",
     "jest": "^29.7.0",
     "prisma": "^5.14.0",
     "ts-jest": "^29.1.4",
     "tsx": "^4.11.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.0"
   },
   "type": "module",
   "prisma": {
