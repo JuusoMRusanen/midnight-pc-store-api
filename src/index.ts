@@ -4,11 +4,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import Query from "./resolvers/Query";
-import { Mutation } from "./resolvers/Mutation";
 import { PrismaClient } from "@prisma/client";
 import { Context } from "./types";
 import Product from "./resolvers/Product";
 import Image from "./resolvers/Image";
+import { Mutation } from "./resolvers/Mutation";
+import Category from "./resolvers/Category";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +23,7 @@ const resolvers = {
   Mutation,
   Product,
   Image,
+  Category,
 };
 
 /**
