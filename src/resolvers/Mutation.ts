@@ -1,17 +1,9 @@
-import {
-  Category,
-  Image,
-  Order,
-  Prisma,
-  PrismaClient,
-  Product,
-  User,
-} from "@prisma/client";
+import { Category, Image, Order, Prisma, Product, User } from "@prisma/client";
+import { Context } from "src/types";
 
-interface Context {
-  prisma: PrismaClient;
-}
-
+/**
+ * Define resolvers for Mutation root type
+ */
 export const Mutation = {
   /**
    * Resolver for adding a product
