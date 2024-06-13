@@ -1,4 +1,12 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import {
+  Category,
+  Image,
+  Order,
+  Prisma,
+  PrismaClient,
+  Product,
+  User,
+} from "@prisma/client";
 
 interface Context {
   prisma: PrismaClient;
@@ -14,8 +22,8 @@ export const Mutation = {
    * @returns newProduct
    */
   addProduct: async (
-    _parent: any,
-    args: { input: Prisma.ProductCreateInput },
+    _parent: Product,
+    args: { input: Prisma.ProductUncheckedCreateInput },
     context: Context
   ) => {
     const { input } = args;
@@ -27,6 +35,9 @@ export const Mutation = {
           price: input.price,
           stock: input.stock,
           images: input.images,
+          category: {
+            connect: { id: input.categoryId },
+          },
         },
       });
       return newProduct;
@@ -44,7 +55,7 @@ export const Mutation = {
    * @returns updatedProduct
    */
   updateProduct: async (
-    _parent: any,
+    _parent: Product,
     args: { id: string; input: Prisma.ProductUpdateInput },
     context: Context
   ) => {
@@ -64,7 +75,7 @@ export const Mutation = {
    * @returns boolean indicating success
    */
   deleteProduct: async (
-    _parent: any,
+    _parent: Product,
     args: { id: string },
     context: Context
   ) => {
@@ -83,7 +94,7 @@ export const Mutation = {
    * @returns newCategory
    */
   addCategory: async (
-    _parent: any,
+    _parent: Category,
     args: { input: Prisma.CategoryCreateInput },
     context: Context
   ) => {
@@ -102,7 +113,7 @@ export const Mutation = {
    * @returns updatedCategory
    */
   updateCategory: async (
-    _parent: any,
+    _parent: Category,
     args: { id: string; input: Prisma.CategoryUpdateInput },
     context: Context
   ) => {
@@ -122,7 +133,7 @@ export const Mutation = {
    * @returns boolean indicating success
    */
   deleteCategory: async (
-    _parent: any,
+    _parent: Category,
     args: { id: string },
     context: Context
   ) => {
@@ -141,7 +152,7 @@ export const Mutation = {
    * @returns newOrder
    */
   addOrder: async (
-    _parent: any,
+    _parent: Order,
     args: { input: Prisma.OrderCreateInput },
     context: Context
   ) => {
@@ -160,7 +171,7 @@ export const Mutation = {
    * @returns updatedOrder
    */
   updateOrder: async (
-    _parent: any,
+    _parent: Order,
     args: { id: string; input: Prisma.OrderUpdateInput },
     context: Context
   ) => {
@@ -179,7 +190,11 @@ export const Mutation = {
    * @param context context
    * @returns boolean indicating success
    */
-  deleteOrder: async (_parent: any, args: { id: string }, context: Context) => {
+  deleteOrder: async (
+    _parent: Order,
+    args: { id: string },
+    context: Context
+  ) => {
     await context.prisma.order.delete({
       where: { id: args.id },
     });
@@ -195,7 +210,7 @@ export const Mutation = {
    * @returns newUser
    */
   addUser: async (
-    _parent: any,
+    _parent: User,
     args: { input: Prisma.UserCreateInput },
     context: Context
   ) => {
@@ -214,7 +229,7 @@ export const Mutation = {
    * @returns updatedUser
    */
   updateUser: async (
-    _parent: any,
+    _parent: User,
     args: { id: string; input: Prisma.UserUpdateInput },
     context: Context
   ) => {
@@ -233,7 +248,7 @@ export const Mutation = {
    * @param context context
    * @returns boolean indicating success
    */
-  deleteUser: async (_parent: any, args: { id: string }, context: Context) => {
+  deleteUser: async (_parent: User, args: { id: string }, context: Context) => {
     await context.prisma.user.delete({
       where: { id: args.id },
     });
@@ -249,12 +264,16 @@ export const Mutation = {
    * @returns newImage
    */
   addImage: async (
-    _parent: any,
-    args: { input: Prisma.ImageCreateInput },
+    _parent: Image,
+    args: { input: Prisma.ImageUncheckedCreateInput },
     context: Context
   ) => {
+    const { input } = args;
     const newImage = await context.prisma.image.create({
-      data: args.input,
+      data: {
+        product: { connect: { id: input.productId } },
+        url: input.url,
+      },
     });
     return newImage;
   },
