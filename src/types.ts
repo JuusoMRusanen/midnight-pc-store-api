@@ -7,3 +7,18 @@ export interface Context {
 export interface QueryProduct {
   id: string;
 }
+
+export interface QueryUser {
+  id: string;
+}
+
+export interface QueryOrder {
+  id: string;
+}
+
+export enum OrderStatus {
+  PENDING,
+  SHIPPED,
+  DELIVERED,
+  CANCELLED,
+}
