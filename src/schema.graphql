@@ -22,6 +22,8 @@ type Query {
   users(filter: UserFilter, sort: UserSort, pagination: PaginationInput): [User]
   user(id: ID!): User
   images: [Image]
+  orderProducts: [OrderProduct]
+  orderProduct(id: ID!): OrderProduct
 }
 
 # Root Mutation Type
@@ -50,6 +52,7 @@ type Product {
   stock: Int!
   category: Category
   images: [Image]
+  orderProducts: [OrderProduct]
 }
 
 type Image {
@@ -76,6 +79,8 @@ type Order {
 }
 
 type OrderProduct {
+  id: ID!
+  order: Order!
   product: Product!
   quantity: Int!
   price: Float!
