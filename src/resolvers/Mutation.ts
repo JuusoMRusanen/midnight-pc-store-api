@@ -1,5 +1,6 @@
 import { Category, Image, Order, Prisma, Product, User } from "@prisma/client";
-import { Context } from "src/types";
+import { Context, OrderStatus } from "src/types";
+import { getOrderStatus } from "src/utils";
 
 /**
  * Define resolvers for Mutation root type
@@ -145,12 +146,25 @@ export const Mutation = {
    */
   addOrder: async (
     _parent: Order,
-    args: { input: Prisma.OrderCreateInput },
+    args: { input: Prisma.OrderUncheckedCreateInput },
     context: Context
   ) => {
+    const { input } = args;
     const newOrder = await context.prisma.order.create({
-      data: args.input,
+      data: {
+        status: getOrderStatus(OrderStatus.PENDING),
+        total: 500,
+        createdAt: input.createdAt,
+        orderItems: input.orderItems,
+        updatedAt: input.updatedAt,
+        user: {
+          connect: {
+            id: input.userId,
+          },
+        },
+      },
     });
+    console.log(newOrder);
     return newOrder;
   },
 
