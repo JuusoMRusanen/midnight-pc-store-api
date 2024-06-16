@@ -10,6 +10,7 @@ import Image from "./resolvers/Image";
 import { Mutation } from "./resolvers/Mutation";
 import Category from "./resolvers/Category";
 import { Query } from "./resolvers/Query";
+import Order from "./resolvers/Order";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ const resolvers = {
   Product,
   Image,
   Category,
+  Order,
 };
 
 /**
